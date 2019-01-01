@@ -20,22 +20,16 @@ export class AuthService {
     }
 
     async signIn(loginUserDto: LoginUserDto): Promise<{token: string}> {
-        return await this.findUserWithPassword({email: loginUserDto.email})
-        .then(async user => {
-            if (!user) {
-                throw new UnauthorizedException()                
-            }
-            return await bcrypt.compare(loginUserDto.password, user.password).then(isValid => { 
-                if (isValid) {
-                    const signedUser = {email: user.email, password: user.password} as UserInterface
-                    return {token: this.jwtService.sign(signedUser)}
-                } else {
-                    throw new UnauthorizedException()
-                }
-            }, () => {
-                throw new UnauthorizedException()
-            })
-        })
+        const user = await this.findUserWithPassword({email: loginUserDto.email})
+        if (!user) {
+            throw new UnauthorizedException()  
+        }
+        const isValid = await bcrypt.compare(loginUserDto.password, user.password);
+        const signedUser = {email: user.email, _id: user._id} as UserInterface
+        if (!isValid) {
+            throw new UnauthorizedException();
+        }
+        return {token: this.jwtService.sign(signedUser)}
     }
 
     async findUserWithPassword(params: {email: string}): Promise<UserInterface> {
@@ -43,16 +37,14 @@ export class AuthService {
     }
 
     async validateUser(payload: JwtPayloadInterface): Promise<UserInterface> {
-        return await this.findUserWithPassword({email: payload.email})
-        .then(async user => {
-            if (!user) {
-                throw new UnauthorizedException()                
-            }
-            if (payload.password === user.password) {
-                return user;
-             } else {
-                 throw new UnauthorizedException()
-             }
-        })
+        const user = await this.findUserWithPassword({email: payload.email})
+        if (!user) {
+            throw new UnauthorizedException()                
+        }
+        const userSignedIn = payload.email === user.email && payload._id === user._id.toString()
+        if (!userSignedIn) {
+            throw new UnauthorizedException()                
+        }
+        return user;
     }
 }

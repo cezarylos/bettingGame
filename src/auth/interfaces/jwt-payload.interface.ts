@@ -1,4 +1,4 @@
 export interface JwtPayloadInterface {
     email: string;
-    password: string;
+    _id: string;
 }

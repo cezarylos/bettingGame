@@ -9,10 +9,10 @@ export class UsersService {
     constructor(@Inject(USER_MODEL_TOKEN) private readonly userModel: Model<UserInterface>) {}
 
     async findOneByParams(params: FindUserByParams): Promise<UserInterface> {
-        return await this.userModel.findOne(params).select('-password').exec()
+        return await this.userModel.findOne(params).exec()
     }
 
     async findAll(): Promise<UserInterface[]> {
-        return await this.userModel.find().select('-password').exec();
+        return await this.userModel.find().exec();
     }
 }
