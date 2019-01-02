@@ -15,8 +15,11 @@ export class AuthService {
 
     async register(registerUserDto: RegisterUserDto): Promise<UserInterface> {
         const registeredUser = new this.authUserModel(registerUserDto);
-        await bcrypt.hash(registeredUser.password, 10).then(hash => registeredUser.password = hash);
-        return await registeredUser.save();
+        const hashedPassword = await bcrypt.hash(registeredUser.password, 10);
+        registeredUser.password = hashedPassword;
+        await registeredUser.save();
+        registeredUser.password = undefined;
+        return registeredUser;
     }
 
     async signIn(loginUserDto: LoginUserDto): Promise<{token: string}> {
