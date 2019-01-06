@@ -13,7 +13,8 @@ export class GameService {
     async createGame(gameDto: GametDto): Promise<GameInterface> {
         const game = new this.gameModel(gameDto);
         const tournament = await this.tournamentService.getTournamentById(gameDto.tournamentId);
-        await tournament.populate('games').execPopulate();
+        tournament.games = [...tournament.games, game._id];
+        await tournament.save()
         return await game.save();
     }
 

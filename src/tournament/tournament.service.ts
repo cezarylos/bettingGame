@@ -16,7 +16,7 @@ export class TournamentService {
     }
 
     async getAllTournaments(): Promise<TournamentInterface[]> {
-        return await this.tournamentModel.find().exec();
+        return await this.tournamentModel.find().populate('games', '-tournamentId').exec();
     }
 
     async getTournamentById(id: ObjectId): Promise<TournamentInterface> {

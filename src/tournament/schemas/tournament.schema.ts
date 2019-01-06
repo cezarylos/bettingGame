@@ -8,7 +8,7 @@ export const TournamentSchema = new mongoose.Schema({
     games: [
         {
             ref: GAME,
-            type: String
+            type: mongoose.Schema.Types.ObjectId
         }
     ]
 })
