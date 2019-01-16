@@ -5,5 +5,7 @@ export const GameSchema = new mongoose.Schema({
     awayTeam: String,
     description: String,
     startTime: Number,
-    tournamentId: String
+    tournamentId: String,
+    homeScore: Number,
+    awayScore: Number
 })

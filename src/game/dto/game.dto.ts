@@ -16,4 +16,8 @@ export class GametDto {
 
     @IsNotEmpty()
     readonly startTime: number;
+
+    homeScore: number;
+
+    awayScore: number;
 }

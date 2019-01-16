@@ -7,4 +7,6 @@ export interface GameInterface extends Document {
     readonly description: string;
     readonly startTime: number;
     readonly tournamentId: ObjectId;
+    homeScore?: number;
+    awayScore?: number;
 }
