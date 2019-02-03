@@ -4,9 +4,10 @@ import { GameService } from './game.service';
 import { gameProviders } from './game.provider';
 import { DatabaseModule } from 'src/database/database.module';
 import { TournamentModule } from 'src/tournament/tournament.module';
+import { UsersModule } from '../users/users.module';
 
 @Module({
-  imports: [DatabaseModule, TournamentModule],
+  imports: [DatabaseModule, TournamentModule, UsersModule],
   controllers: [GameController],
   providers: [GameService, ...gameProviders],
   exports: [GameService, ...gameProviders]

@@ -1,2 +1,2 @@
-export const AUTH_USER_TOKEN = 'AuthUserModelToken'
-export const AUTH_USER = 'AuthUser'
+export const AUTH_USER_TOKEN = 'AuthUserModelToken';
+export const AUTH_USER = 'AuthUser';

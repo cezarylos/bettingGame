@@ -9,6 +9,6 @@ import { GameModule } from './game/game.module';
 @Module({
   imports: [AuthModule, UsersModule, TournamentModule, GameModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService]
 })
-export class AppModule { }
+export class AppModule {}

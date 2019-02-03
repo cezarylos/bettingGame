@@ -1,3 +1,6 @@
+import { ObjectId } from 'bson';
+
 export interface FindUserByParams {
-    email: string;
+  email?: string;
+  _id?: ObjectId;
 }

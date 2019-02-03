@@ -3,10 +3,10 @@ import { TournamentService } from './tournament.service';
 
 describe('TournamentService', () => {
   let service: TournamentService;
-  
+
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [TournamentService],
+      providers: [TournamentService]
     }).compile();
     service = module.get<TournamentService>(TournamentService);
   });

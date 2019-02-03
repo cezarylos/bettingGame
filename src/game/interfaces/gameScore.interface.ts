@@ -1,4 +1,4 @@
 export interface GameScoreInterface {
-    homeScore: number;
-    awayScore: number;
+  homeScore: number;
+  awayScore: number;
 }
